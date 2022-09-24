@@ -28,7 +28,6 @@ class Skill(ABC):
     def damage(self):
         pass
 
-    @abstractmethod
     def skill_effect(self) -> str:
         """
         Логика использования скилла:
