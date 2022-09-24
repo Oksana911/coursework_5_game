@@ -78,7 +78,7 @@ class BaseUnit(ABC):
     def use_skill(self, target: BaseUnit) -> str:
         """ Метод использования умения """
         if self._is_skill_used:
-            return "Навык использован"
+            return "Умение использовано"
         else:
             if self.unit_class.skill._is_stamina_enough:
                 self._is_skill_used = True
