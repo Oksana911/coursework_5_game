@@ -25,14 +25,16 @@ class Arena(metaclass=BaseSingleton):
 
     def _check_players_hp(self) -> str:
         """ Проверка здоровья игрока и врага """
-        if self.player.hp <= 0:
-            self.battle_result = "Игрок проиграл битву"
-        if self.enemy.hp <= 0:
-            self.battle_result = "Игрок выиграл битву"
-        if self.player.hp == self.enemy.hp:
+        if self.player.hp <= 0 and self.enemy.hp <= 0:
             self.battle_result = "Ничья"
-        return self.battle_result
-        # return self._end_game()
+            return self._end_game()
+        elif self.enemy.hp <= 0:
+            self.battle_result = f"Игрок {self.player.name} выиграл битву"
+            return self._end_game()
+        elif self.player.hp <= 0:
+            self.battle_result = f"Игрок {self.player.name} проиграл битву"
+            return self._end_game()
+        # return self.battle_result
 
     def _stamina_regeneration(self):
         """ Регенерация стамины для игрока и врага за ход """
@@ -45,7 +47,7 @@ class Arena(metaclass=BaseSingleton):
         if result:
             return result
         self._stamina_regeneration()
-        self.enemy.hit(self.player)
+        return self.enemy.hit(self.player)
 
     def _end_game(self) -> str:
         """ КНОПКА ЗАВЕРШЕНИЕ ИГРЫ """

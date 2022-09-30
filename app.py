@@ -31,6 +31,8 @@ def hit():
     if arena.game_is_running:
         result = arena.player_hit()
         return render_template('fight.html', heroes=heroes, result=result)
+    else:
+        return redirect(url_for("end_fight"))
 
 
 @app.route("/fight/use-skill")
